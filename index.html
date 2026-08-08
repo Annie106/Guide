@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>误踢申诉方式</title>
+    <title>误踢申诉指南</title>
     <style>
         /* ===== 全局重置 & 字体 ===== */
         * {
@@ -205,7 +205,7 @@
             display: block;
         }
 
-        /* ===== 状态提示条 ===== */
+        /* ===== 状态提示条（仅用于红色错误） ===== */
         .status-tip {
             width: 100%;
             max-width: 260px;
@@ -218,22 +218,10 @@
             display: none;
             transition: all 0.3s;
         }
-        .status-tip.warning {
-            background: #fef3c7;
-            color: #92400e;
-            border: 1px solid #f59e0b;
-            display: block;
-        }
         .status-tip.error {
             background: #fee2e2;
             color: #991b1b;
             border: 1px solid #ef4444;
-            display: block;
-        }
-        .status-tip.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #10b981;
             display: block;
         }
 
@@ -281,7 +269,111 @@
         }
 
         /* ============================================================
-                   移动端优化
+                   右上角 Toast 提示（无关闭按钮，黄色进度条）
+        ============================================================ */
+        .toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            pointer-events: none;
+            max-width: 90vw;
+        }
+
+        .toast-item {
+            pointer-events: auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf4;
+            min-width: 280px;
+            max-width: 420px;
+            animation: toastSlideIn 0.4s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+            transform: translateX(0);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .toast-item.hiding {
+            opacity: 0;
+            transform: translateX(40px);
+        }
+
+        .toast-item .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 24px 16px 22px;
+        }
+
+        .toast-item .toast-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .toast-item .toast-body {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex: 1;
+        }
+
+        .toast-item .toast-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .toast-item .toast-desc {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* ===== Toast 黄色进度条 ===== */
+        .toast-item .toast-progress {
+            width: 100%;
+            height: 4px;
+            background: #fef3c7;
+            border-radius: 0 0 14px 14px;
+            overflow: hidden;
+        }
+
+        .toast-item .toast-progress .toast-progress-bar {
+            height: 100%;
+            background: #f59e0b;
+            border-radius: 0 0 0 14px;
+            width: 100%;
+        }
+
+        @keyframes progressShrink {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0%;
+            }
+        }
+
+        @keyframes toastSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(40px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* ============================================================
+                   移动端优化（重点优化弹窗）
         ============================================================ */
 
         @media (max-width: 640px) {
@@ -323,6 +415,41 @@
                 max-width: 200px;
                 font-size: 12px;
                 padding: 6px 10px;
+            }
+
+            /* 移动端弹窗优化：全宽，更紧凑 */
+            .toast-container {
+                top: 16px;
+                right: 12px;
+                left: 12px;
+                align-items: stretch;
+                max-width: 100%;
+            }
+            .toast-item {
+                max-width: 100%;
+                min-width: unset;
+                border-radius: 12px;
+                width: 100%;
+            }
+            .toast-item .toast-content {
+                padding: 14px 18px 12px 16px;
+                gap: 12px;
+            }
+            .toast-item .toast-title {
+                font-size: 15px;
+            }
+            .toast-item .toast-desc {
+                font-size: 13px;
+            }
+            .toast-item .toast-icon {
+                font-size: 24px;
+            }
+            .toast-item .toast-progress {
+                height: 3px;
+                border-radius: 0 0 12px 12px;
+            }
+            .toast-item .toast-progress .toast-progress-bar {
+                border-radius: 0 0 0 12px;
             }
         }
 
@@ -428,6 +555,37 @@
                 font-size: 12px;
                 margin-top: 24px;
             }
+
+            /* 小屏手机弹窗优化 */
+            .toast-container {
+                top: 12px;
+                right: 10px;
+                left: 10px;
+                gap: 6px;
+            }
+            .toast-item {
+                border-radius: 10px;
+            }
+            .toast-item .toast-content {
+                padding: 12px 14px 10px 12px;
+                gap: 10px;
+            }
+            .toast-item .toast-title {
+                font-size: 14px;
+            }
+            .toast-item .toast-desc {
+                font-size: 12px;
+            }
+            .toast-item .toast-icon {
+                font-size: 20px;
+            }
+            .toast-item .toast-progress {
+                height: 2px;
+                border-radius: 0 0 10px 10px;
+            }
+            .toast-item .toast-progress .toast-progress-bar {
+                border-radius: 0 0 0 10px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -471,6 +629,25 @@
             .status-tip {
                 font-size: 11px;
                 padding: 4px 8px;
+            }
+
+            .toast-container {
+                top: 8px;
+                right: 8px;
+                left: 8px;
+            }
+            .toast-item .toast-content {
+                padding: 10px 12px 8px 10px;
+                gap: 8px;
+            }
+            .toast-item .toast-title {
+                font-size: 13px;
+            }
+            .toast-item .toast-desc {
+                font-size: 11px;
+            }
+            .toast-item .toast-icon {
+                font-size: 18px;
             }
         }
     </style>
@@ -520,22 +697,25 @@
                 </div>
             </div>
 
-            <!-- 步骤 2：进入企业信息 -->
+            <!-- 步骤 2：添加群主 → 进入企业信息 -->
             <div class="step" style="border-top-color: #2563eb; background: #f8faff;">
                 <div class="step-header">
                     <span class="step-num">2</span>
-                    <span class="step-title">进入「企业信息」</span>
+                    <span class="step-title">添加群主Annie → 进入「企业信息」</span>
                 </div>
                 <div class="step-desc">
-                    点击群主头像 → <strong>企业信息</strong> → 底部 <strong>「误踢反馈」</strong> 按钮，跳转问卷后提交截图。
+                    <strong>添加群主为联系人后 → </strong>点击群主头像 → <strong>企业信息</strong> → 底部 <strong>「误踢反馈」</strong> 按钮，跳转问卷后提交截图。
                 </div>
                 <div class="image-placeholder">
                     <div class="placeholder-item" style="flex: 1 1 220px; min-width: 160px; flex-wrap: wrap;">
 
-                        <!-- ===== 状态提示条 ===== -->
+                        <!-- ===== 状态提示条（仅用于红色错误） ===== -->
                         <div id="statusTip" class="status-tip"></div>
 
-                        <!-- ===== 主图 ===== -->
+                        <!-- ==========================================================
+                        图片配置区 — 修改下方两个 src 即可
+                        ========================================================== -->
+                        <!-- 主图（建议使用外部图片链接，失效时会自动切换备用图并弹窗） -->
                         <img 
                             id="mainImage"
                             src="https://links.8uid.com/d/860893d3b68a7587e186989811749330"
@@ -543,7 +723,7 @@
                             class="demo-img"
                         />
 
-                        <!-- ===== 备用图（内联 SVG，永不失败） ===== -->
+                        <!-- 备用图（主图失效时自动切换至此，建议使用稳定链接） -->
                         <img 
                             id="fallbackImage"
                             src="https://153485619232768.abvod.cn/fly.png"
@@ -552,7 +732,7 @@
                             style="display: none;"
                         />
 
-                        <!-- ===== 纯文字备用 ===== -->
+                        <!-- ===== 纯文字备用（当主图和备用图都加载失败时显示） ===== -->
                         <div id="textFallback" class="img-error-placeholder" style="display: none;">
                             <span class="err-icon">🖼️</span>
                             <span>图片加载失败<br/>请参考文字描述</span>
@@ -576,20 +756,109 @@
 
     </div>
 
+    <!-- ============================================================
+    右上角 Toast 容器（无关闭按钮，黄色进度条）
+    ============================================================ -->
+    <div id="toastContainer" class="toast-container"></div>
+
     <script>
+        // ================================================================
+        //  Toast 管理（右上角弹窗，无关闭按钮，黄色进度条，点击关闭）
+        // ================================================================
+
+        var toastContainer = document.getElementById('toastContainer');
+        var toastTimer = null;
+
         /**
-         * 显示状态提示（一直显示）
+         * 显示右上角 Toast 提示（带黄色进度条，无×按钮）
+         * @param {string} icon - 图标 emoji
+         * @param {string} title - 标题
+         * @param {string} desc - 描述
+         * @param {number} duration - 自动消失毫秒数，默认8000ms
          */
-        function showStatusTip(message, type) {
-            var tip = document.getElementById('statusTip');
-            if (!tip) return;
-            tip.textContent = message;
-            tip.className = 'status-tip ' + type;
+        function showToast(icon, title, desc, duration) {
+            duration = duration || 8000;
+
+            // 移除已有 toast
+            var existing = toastContainer.querySelector('.toast-item');
+            if (existing) {
+                if (existing.parentNode) {
+                    existing.parentNode.removeChild(existing);
+                }
+                if (toastTimer) {
+                    clearTimeout(toastTimer);
+                    toastTimer = null;
+                }
+            }
+
+            // 创建新 toast
+            var toast = document.createElement('div');
+            toast.className = 'toast-item';
+            toast.innerHTML = 
+                '<div class="toast-content">' +
+                    '<span class="toast-icon">' + icon + '</span>' +
+                    '<div class="toast-body">' +
+                        '<span class="toast-title">' + title + '</span>' +
+                        '<span class="toast-desc">' + desc + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="toast-progress">' +
+                    '<div class="toast-progress-bar" id="toastProgressBar"></div>' +
+                '</div>';
+
+            // 点击 toast 任意区域关闭
+            toast.addEventListener('click', function() {
+                dismissToast(toast);
+            });
+
+            toastContainer.appendChild(toast);
+
+            // 动态设置进度条动画时长
+            var progressBar = toast.querySelector('#toastProgressBar');
+            if (progressBar) {
+                progressBar.style.animation = 'none';
+                void progressBar.offsetHeight;
+                progressBar.style.animation = 'progressShrink ' + (duration / 1000) + 's linear forwards';
+            }
+
+            // 自动消失
+            if (duration > 0) {
+                toastTimer = setTimeout(function() {
+                    dismissToast(toast);
+                }, duration);
+            }
         }
 
         /**
-         * 隐藏状态提示（完全清除）
+         * 关闭单个 toast（带淡出动画）
          */
+        function dismissToast(toast) {
+            if (!toast || !toast.parentNode) return;
+            if (toast.classList.contains('hiding')) return;
+
+            toast.classList.add('hiding');
+            if (toastTimer) {
+                clearTimeout(toastTimer);
+                toastTimer = null;
+            }
+            setTimeout(function() {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }
+
+        // ================================================================
+        //  红色错误提示（仅用于备用图也失败时）
+        // ================================================================
+
+        function showErrorTip(message) {
+            var tip = document.getElementById('statusTip');
+            if (!tip) return;
+            tip.textContent = message;
+            tip.className = 'status-tip error';
+        }
+
         function hideStatusTip() {
             var tip = document.getElementById('statusTip');
             if (!tip) return;
@@ -597,9 +866,10 @@
             tip.textContent = '';
         }
 
-        /**
-         * 显示文字占位，隐藏所有图片
-         */
+        // ================================================================
+        //  文字占位（主图 + 备用图均失败）
+        // ================================================================
+
         function showTextFallback() {
             var main = document.getElementById('mainImage');
             var fallback = document.getElementById('fallbackImage');
@@ -610,93 +880,80 @@
             if (textFallback) textFallback.style.display = 'flex';
         }
 
-        /**
-         * 主图加载失败处理
-         * 1. 显示黄色警告（一直显示）
-         * 2. 切换到备用图
-         */
+        // ================================================================
+        //  备用图加载失败 → 红色错误
+        // ================================================================
+
+        function handleFallbackError(img) {
+            hideStatusTip();
+            showErrorTip('❌ 备用图加载失败，请参考文字描述');
+            showTextFallback();
+        }
+
+        // ================================================================
+        //  主图加载失败 → 右上角 Toast（黄色进度条）+ 切换备用图
+        // ================================================================
+
         function handleImageError(img) {
-            // 防止重复处理
             if (img.dataset.fallbackAttempted === 'true') {
-                // 已尝试过备用图，但备用图也失败 → 仅显示红色错误
-                showStatusTip('❌ 主图与备用图均加载失败，请参考文字描述', 'error');
+                showErrorTip('❌ 备用图加载失败，请参考文字描述');
                 showTextFallback();
                 return;
             }
 
-            // 标记主图已尝试
             img.dataset.fallbackAttempted = 'true';
 
-            // 显示黄色警告（一直显示）
-            showStatusTip('⚠️ 主图加载失败，已切换至备用示意图', 'warning');
+            // 显示 Toast，8秒自动消失
+            showToast('🔄', '主图加载失败', '已切换至备用示意图', 8000);
+
+            hideStatusTip();
 
             var fallback = document.getElementById('fallbackImage');
             if (fallback) {
-                // 隐藏主图，显示备用图
                 img.style.display = 'none';
                 fallback.style.display = 'block';
-                // 备用图加载失败时 → 取消黄色，仅显示红色
+
                 fallback.onerror = function() {
                     handleFallbackError(this);
                 };
             } else {
-                // 没有备用图，直接显示红色错误
-                showStatusTip('❌ 图片加载失败，请参考文字描述', 'error');
+                showErrorTip('❌ 备用图加载失败，请参考文字描述');
                 showTextFallback();
             }
         }
 
-        /**
-         * 备用图加载失败处理
-         * 完全清除黄色警告，仅显示红色错误提示
-         */
-        function handleFallbackError(img) {
-            // 先完全清除当前状态
-            hideStatusTip();
-            showStatusTip('❌ 主图与备用图均加载失败，请参考文字描述', 'error');
-            showTextFallback();
-        }
+        // ================================================================
+        //  主动检测主图加载状态（3秒超时检测）
+        // ================================================================
 
-        /**
-         * 主动检测主图加载状态，加快失效反馈
-         */
         function checkMainImage() {
             var mainImg = document.getElementById('mainImage');
             if (!mainImg) return;
 
-            // 如果图片已经加载完成
             if (mainImg.complete) {
                 if (mainImg.naturalWidth === 0) {
-                    // 加载失败（0 宽表示无效图片）
                     handleImageError(mainImg);
                 }
-                // 加载成功，无事
                 return;
             }
 
-            // 未加载完成，设置超时检测（3秒）
             var timeoutId = setTimeout(function() {
-                // 再次检查状态
                 if (!mainImg.complete || mainImg.naturalWidth === 0) {
-                    // 超时后仍未成功，认为失败
                     handleImageError(mainImg);
                 }
             }, 3000);
 
-            // 如果图片在超时前加载成功或失败，清除定时器
             mainImg.onload = function() {
                 clearTimeout(timeoutId);
             };
             mainImg.onerror = function() {
                 clearTimeout(timeoutId);
-                // 如果尚未处理，触发错误处理（但可能超时已经触发）
                 if (!mainImg.dataset.fallbackAttempted) {
                     handleImageError(mainImg);
                 }
             };
         }
 
-        // 页面加载完成后执行检测
         document.addEventListener('DOMContentLoaded', function() {
             checkMainImage();
         });
