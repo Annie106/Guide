@@ -56,10 +56,6 @@
             letter-spacing: -0.4px;
         }
 
-        .header-left h1 span {
-            color: #2563eb;
-        }
-
         .sub-headline {
             font-size: 15px;
             color: #475569;
@@ -70,10 +66,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .sub-headline .emoji {
-            font-size: 18px;
         }
 
         /* ===== 步骤容器 ===== */
@@ -173,6 +165,7 @@
             font-size: 13px;
             transition: all 0.2s ease;
             cursor: default;
+            position: relative;
         }
 
         .placeholder-item:hover {
@@ -200,7 +193,7 @@
             line-height: 1.4;
         }
 
-        /* ===== 图片样式（控制尺寸） ===== */
+        /* ===== 图片样式 ===== */
         .placeholder-item .demo-img {
             width: 100%;
             max-width: 260px;
@@ -210,6 +203,61 @@
             margin-bottom: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             display: block;
+        }
+
+        /* ===== 状态提示条 ===== */
+        .status-tip {
+            width: 100%;
+            max-width: 260px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 8px;
+            display: none;
+            transition: all 0.3s;
+        }
+        .status-tip.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+            display: block;
+        }
+        .status-tip.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+            display: block;
+        }
+        .status-tip.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            display: block;
+        }
+
+        /* ===== 图片加载失败时的文字占位 ===== */
+        .img-error-placeholder {
+            display: none;
+            width: 100%;
+            max-width: 260px;
+            min-height: 120px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            border: 2px dashed #cbd5e1;
+            margin-bottom: 8px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+        .img-error-placeholder .err-icon {
+            font-size: 36px;
+            margin-bottom: 6px;
         }
 
         .text-group {
@@ -266,6 +314,15 @@
             }
             .placeholder-item .demo-img {
                 max-width: 200px;
+            }
+            .img-error-placeholder {
+                max-width: 200px;
+                min-height: 100px;
+            }
+            .status-tip {
+                max-width: 200px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
         }
 
@@ -326,6 +383,7 @@
                 justify-content: flex-start;
                 border-radius: 14px;
                 text-align: left;
+                flex-wrap: wrap;
             }
             .placeholder-item .icon {
                 font-size: 28px;
@@ -336,6 +394,23 @@
                 max-width: 140px;
                 margin-bottom: 0;
                 flex-shrink: 0;
+            }
+            .img-error-placeholder {
+                max-width: 140px;
+                min-height: 80px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+                padding: 12px;
+            }
+            .img-error-placeholder .err-icon {
+                font-size: 28px;
+            }
+            .status-tip {
+                max-width: 100%;
+                font-size: 12px;
+                padding: 6px 10px;
+                order: 10;
+                flex-basis: 100%;
             }
             .text-group {
                 align-items: flex-start;
@@ -381,8 +456,21 @@
             .placeholder-item .demo-img {
                 max-width: 100px;
             }
+            .img-error-placeholder {
+                max-width: 100px;
+                min-height: 60px;
+                padding: 8px;
+                font-size: 12px;
+            }
+            .img-error-placeholder .err-icon {
+                font-size: 22px;
+            }
             .placeholder-item .label {
                 font-size: 13px;
+            }
+            .status-tip {
+                font-size: 11px;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -436,18 +524,40 @@
             <div class="step" style="border-top-color: #2563eb; background: #f8faff;">
                 <div class="step-header">
                     <span class="step-num">2</span>
-                    <span class="step-title">添加好友后，进入「企业信息」</span>
+                    <span class="step-title">进入「企业信息」</span>
                 </div>
                 <div class="step-desc">
-                    添加群主为好友 → 点击群主头像 → <strong>企业信息</strong> → 底部 <strong>「误踢反馈」</strong> 按钮，跳转问卷后提交截图。
+                    点击群主头像 → <strong>企业信息</strong> → 底部 <strong>「误踢反馈」</strong> 按钮，跳转问卷后提交截图。
                 </div>
                 <div class="image-placeholder">
-                    <div class="placeholder-item" style="flex: 1 1 220px; min-width: 160px;">
+                    <div class="placeholder-item" style="flex: 1 1 220px; min-width: 160px; flex-wrap: wrap;">
+
+                        <!-- ===== 状态提示条 ===== -->
+                        <div id="statusTip" class="status-tip"></div>
+
+                        <!-- ===== 主图 ===== -->
                         <img 
+                            id="mainImage"
                             src="https://links.8uid.com/d/860893d3b68a7587e186989811749330"
                             alt="企业信息页示意"
                             class="demo-img"
                         />
+
+                        <!-- ===== 备用图（内联 SVG，永不失败） ===== -->
+                        <img 
+                            id="fallbackImage"
+                            src="https://153485619232768.abvod.cn/fly.png"
+                            alt="备用示意图片"
+                            class="demo-img"
+                            style="display: none;"
+                        />
+
+                        <!-- ===== 纯文字备用 ===== -->
+                        <div id="textFallback" class="img-error-placeholder" style="display: none;">
+                            <span class="err-icon">🖼️</span>
+                            <span>图片加载失败<br/>请参考文字描述</span>
+                        </div>
+
                         <div class="text-group">
                             <span class="label">企业信息页</span>
                             <span class="sub">示意入口位置</span>
@@ -465,6 +575,132 @@
         </div>
 
     </div>
+
+    <script>
+        /**
+         * 显示状态提示（一直显示）
+         */
+        function showStatusTip(message, type) {
+            var tip = document.getElementById('statusTip');
+            if (!tip) return;
+            tip.textContent = message;
+            tip.className = 'status-tip ' + type;
+        }
+
+        /**
+         * 隐藏状态提示（完全清除）
+         */
+        function hideStatusTip() {
+            var tip = document.getElementById('statusTip');
+            if (!tip) return;
+            tip.className = 'status-tip';
+            tip.textContent = '';
+        }
+
+        /**
+         * 显示文字占位，隐藏所有图片
+         */
+        function showTextFallback() {
+            var main = document.getElementById('mainImage');
+            var fallback = document.getElementById('fallbackImage');
+            var textFallback = document.getElementById('textFallback');
+
+            if (main) main.style.display = 'none';
+            if (fallback) fallback.style.display = 'none';
+            if (textFallback) textFallback.style.display = 'flex';
+        }
+
+        /**
+         * 主图加载失败处理
+         * 1. 显示黄色警告（一直显示）
+         * 2. 切换到备用图
+         */
+        function handleImageError(img) {
+            // 防止重复处理
+            if (img.dataset.fallbackAttempted === 'true') {
+                // 已尝试过备用图，但备用图也失败 → 仅显示红色错误
+                showStatusTip('❌ 主图与备用图均加载失败，请参考文字描述', 'error');
+                showTextFallback();
+                return;
+            }
+
+            // 标记主图已尝试
+            img.dataset.fallbackAttempted = 'true';
+
+            // 显示黄色警告（一直显示）
+            showStatusTip('⚠️ 主图加载失败，已切换至备用示意图', 'warning');
+
+            var fallback = document.getElementById('fallbackImage');
+            if (fallback) {
+                // 隐藏主图，显示备用图
+                img.style.display = 'none';
+                fallback.style.display = 'block';
+                // 备用图加载失败时 → 取消黄色，仅显示红色
+                fallback.onerror = function() {
+                    handleFallbackError(this);
+                };
+            } else {
+                // 没有备用图，直接显示红色错误
+                showStatusTip('❌ 图片加载失败，请参考文字描述', 'error');
+                showTextFallback();
+            }
+        }
+
+        /**
+         * 备用图加载失败处理
+         * 完全清除黄色警告，仅显示红色错误提示
+         */
+        function handleFallbackError(img) {
+            // 先完全清除当前状态
+            hideStatusTip();
+            showStatusTip('❌ 主图与备用图均加载失败，请参考文字描述', 'error');
+            showTextFallback();
+        }
+
+        /**
+         * 主动检测主图加载状态，加快失效反馈
+         */
+        function checkMainImage() {
+            var mainImg = document.getElementById('mainImage');
+            if (!mainImg) return;
+
+            // 如果图片已经加载完成
+            if (mainImg.complete) {
+                if (mainImg.naturalWidth === 0) {
+                    // 加载失败（0 宽表示无效图片）
+                    handleImageError(mainImg);
+                }
+                // 加载成功，无事
+                return;
+            }
+
+            // 未加载完成，设置超时检测（3秒）
+            var timeoutId = setTimeout(function() {
+                // 再次检查状态
+                if (!mainImg.complete || mainImg.naturalWidth === 0) {
+                    // 超时后仍未成功，认为失败
+                    handleImageError(mainImg);
+                }
+            }, 3000);
+
+            // 如果图片在超时前加载成功或失败，清除定时器
+            mainImg.onload = function() {
+                clearTimeout(timeoutId);
+            };
+            mainImg.onerror = function() {
+                clearTimeout(timeoutId);
+                // 如果尚未处理，触发错误处理（但可能超时已经触发）
+                if (!mainImg.dataset.fallbackAttempted) {
+                    handleImageError(mainImg);
+                }
+            };
+        }
+
+        // 页面加载完成后执行检测
+        document.addEventListener('DOMContentLoaded', function() {
+            checkMainImage();
+        });
+    </script>
 
 </body>
 </html>
