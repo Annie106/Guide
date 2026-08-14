@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>误踢申诉指南</title>
     <style>
-        /* ===== 全局重置 & 字体 ===== */
+        /* ============================================================
+               朴素简洁版样式
+               修改说明：圆角缩小、阴影淡化、颜色沉稳、去动画
+               如需回退：替换下方 style 块为原始版本即可
+               ============================================================ */
+
+        /* ----- 全局重置 ----- */
         * {
             margin: 0;
             padding: 0;
@@ -14,244 +20,258 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
-            background: #f1f5f9;
-            color: #111827;
-            padding: 20px 16px 40px;
+            background: #f2f4f7;
+            /* 更朴素的灰底 */
+            color: #1e293b;
+            padding: 24px 16px 40px;
             display: flex;
             justify-content: center;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* ===== 主卡片 ===== */
+        /* ----- 主卡片：朴素、白底、极浅阴影 ----- */
         .card {
             max-width: 720px;
             width: 100%;
             background: #ffffff;
-            border-radius: 28px;
-            padding: 32px 28px 28px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            transition: all 0.2s;
+            border-radius: 8px;
+            /* 从 28px 改为 8px */
+            padding: 28px 24px 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            /* 极浅阴影 */
+            border: 1px solid #e5e9ef;
+            transition: none;
+            /* 去掉过渡动画 */
         }
 
-        /* ===== 头部 ===== */
+        /* ----- 头部：更简洁 ----- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 4px;
         }
 
         .header-left h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.4px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.2px;
         }
 
         .sub-headline {
-            font-size: 15px;
-            color: #475569;
-            margin-top: 4px;
-            margin-bottom: 28px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 14px;
+            color: #5b6b7d;
+            margin-top: 2px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e9edf2;
         }
 
-        /* ===== 步骤容器 ===== */
+        /* ----- 步骤容器：间距缩小 ----- */
         .steps {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 18px;
+            /* 从 24px 缩小 */
         }
 
-        /* ===== 单个步骤 ===== */
+        /* ----- 单个步骤：扁平、简洁 ----- */
         .step {
-            background: #fafcff;
-            border: 1px solid #e9edf4;
-            border-radius: 18px;
-            padding: 24px 26px;
-            transition: all 0.25s ease;
-            position: relative;
+            background: #fafbfc;
+            border: 1px solid #e5e9ef;
+            border-radius: 6px;
+            /* 从 18px 改为 6px */
+            padding: 18px 20px;
+            /* 从 24px 26px 缩小 */
+            transition: none;
+            /* 去掉所有悬停过渡 */
         }
 
+        /* 去掉悬停效果 */
+        .step:hover {
+            border-color: #e5e9ef;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* 顶部彩色边框保留，但颜色调暗 */
         .step:first-child {
-            border-top: 3px solid #2563eb;
+            border-top: 3px solid #4a6a8c;
+            /* 从亮蓝改为暗蓝灰 */
         }
 
         .step:last-child {
-            border-top: 3px solid #2563eb;
-            background: #f8faff;
+            border-top: 3px solid #4a6a8c;
+            background: #f8f9fb;
         }
 
-        .step:hover {
-            border-color: #b9d0f0;
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.04);
+        /* 去掉悬停效果 */
+        .step:last-child:hover {
+            border-color: #e5e9ef;
+            box-shadow: none;
+            transform: none;
         }
 
         .step-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 8px;
         }
 
+        /* 步骤数字：朴素圆形，无阴影 */
         .step-num {
-            width: 36px;
-            height: 36px;
-            background: #2563eb;
+            width: 30px;
+            height: 30px;
+            background: #4a6a8c;
             color: #ffffff;
-            font-weight: 800;
-            font-size: 17px;
+            font-weight: 600;
+            font-size: 15px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+            box-shadow: none;
+            /* 去掉阴影 */
         }
 
         .step-title {
-            font-size: 19px;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.2px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.1px;
         }
 
         .step-desc {
-            font-size: 15px;
-            color: #334155;
+            font-size: 14px;
+            color: #3d4e62;
             line-height: 1.7;
-            margin-bottom: 18px;
-            padding-left: 4px;
+            margin-bottom: 14px;
+            padding-left: 2px;
         }
 
         .step-desc strong {
-            color: #2563eb;
-            font-weight: 700;
+            color: #3b6b8c;
+            font-weight: 600;
         }
 
-        /* ===== 图片占位区（网格） ===== */
+        /* ----- 图片占位区 ----- */
         .image-placeholder {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 4px;
+            gap: 12px;
+            margin-top: 2px;
         }
 
         .placeholder-item {
-            flex: 1 1 160px;
-            min-width: 130px;
+            flex: 1 1 150px;
+            min-width: 120px;
             background: #ffffff;
-            border: 2px dashed #dce2ec;
-            border-radius: 16px;
-            padding: 16px 12px 14px;
+            border: 2px dashed #d5dbe3;
+            border-radius: 8px;
+            padding: 14px 10px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #475569;
+            color: #5b6b7d;
             font-size: 13px;
-            transition: all 0.2s ease;
+            transition: none;
             cursor: default;
             position: relative;
         }
 
+        /* 去掉悬停效果 */
         .placeholder-item:hover {
-            border-color: #60a5fa;
-            background: #f8faff;
-            transform: translateY(-2px);
+            border-color: #d5dbe3;
+            background: #ffffff;
+            transform: none;
         }
 
         .placeholder-item .icon {
-            font-size: 36px;
-            margin-bottom: 8px;
-            opacity: 0.9;
+            font-size: 32px;
+            margin-bottom: 6px;
+            opacity: 0.85;
         }
 
         .placeholder-item .label {
-            font-weight: 600;
-            color: #0f172a;
-            font-size: 14px;
-            margin-bottom: 2px;
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 13px;
+            margin-bottom: 1px;
         }
 
         .placeholder-item .sub {
-            font-size: 12px;
-            color: #94a3b8;
-            line-height: 1.4;
+            font-size: 11px;
+            color: #8a9aa9;
+            line-height: 1.3;
         }
 
-        /* ===== 图片样式 ===== */
+        /* ----- 图片样式：朴素 ----- */
         .placeholder-item .demo-img {
             width: 100%;
-            max-width: 260px;
+            max-width: 240px;
             height: auto;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border-radius: 6px;
+            border: 1px solid #e5e9ef;
+            margin-bottom: 6px;
+            box-shadow: none;
             display: block;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .placeholder-item .demo-img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+            transition: none;
         }
 
-        /* ===== 状态提示条（仅用于红色错误） ===== */
+        .placeholder-item .demo-img:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ----- 状态提示（红色错误）----- */
         .status-tip {
             width: 100%;
-            max-width: 260px;
-            padding: 8px 12px;
-            border-radius: 8px;
+            max-width: 240px;
+            padding: 6px 10px;
+            border-radius: 4px;
             font-size: 13px;
             font-weight: 500;
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: none;
-            transition: all 0.3s;
         }
+
         .status-tip.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #ef4444;
+            background: #fce8e8;
+            color: #a04444;
+            border: 1px solid #e8c8c8;
             display: block;
         }
 
-        /* ===== 图片加载失败时的文字占位 ===== */
+        /* ----- 图片加载失败占位 ----- */
         .img-error-placeholder {
             display: none;
             width: 100%;
-            max-width: 260px;
-            min-height: 120px;
-            background: #f1f5f9;
-            border-radius: 10px;
-            border: 2px dashed #cbd5e1;
-            margin-bottom: 8px;
+            max-width: 240px;
+            min-height: 100px;
+            background: #f5f6f8;
+            border-radius: 6px;
+            border: 2px dashed #d5dbe3;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
-            font-size: 14px;
-            padding: 20px;
+            color: #8a9aa9;
+            font-size: 13px;
+            padding: 16px;
             text-align: center;
         }
+
         .img-error-placeholder .err-icon {
-            font-size: 36px;
-            margin-bottom: 6px;
+            font-size: 32px;
+            margin-bottom: 4px;
         }
 
         .text-group {
@@ -260,32 +280,32 @@
             align-items: center;
         }
 
-        /* ===== 底部 ===== */
+        /* ----- 底部 ----- */
         .footer {
-            margin-top: 32px;
-            padding-top: 18px;
-            border-top: 1px solid #f1f5f9;
+            margin-top: 28px;
+            padding-top: 14px;
+            border-top: 1px solid #e9edf2;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
-            font-size: 13px;
-            color: #94a3b8;
+            gap: 6px;
+            font-size: 12px;
+            color: #8a9aa9;
         }
 
         /* ============================================================
-                   右上角 Toast 提示（无关闭按钮，黄色进度条）
+                   Toast（右上角，黄色进度条）— 样式微调
         ============================================================ */
         .toast-container {
             position: fixed;
-            top: 24px;
-            right: 24px;
+            top: 20px;
+            right: 20px;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 8px;
+            gap: 6px;
             pointer-events: none;
             max-width: 90vw;
         }
@@ -293,13 +313,13 @@
         .toast-item {
             pointer-events: auto;
             background: #ffffff;
-            border-radius: 14px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e9edf4;
-            min-width: 280px;
-            max-width: 420px;
-            animation: toastSlideIn 0.4s ease;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+            border: 1px solid #e5e9ef;
+            min-width: 260px;
+            max-width: 400px;
+            animation: toastSlideIn 0.3s ease;
+            transition: opacity 0.25s ease, transform 0.25s ease;
             opacity: 1;
             transform: translateX(0);
             overflow: hidden;
@@ -308,53 +328,52 @@
 
         .toast-item.hiding {
             opacity: 0;
-            transform: translateX(40px);
+            transform: translateX(30px);
         }
 
         .toast-item .toast-content {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 18px 24px 16px 22px;
+            gap: 12px;
+            padding: 14px 20px 12px 18px;
         }
 
         .toast-item .toast-icon {
-            font-size: 28px;
+            font-size: 24px;
             flex-shrink: 0;
         }
 
         .toast-item .toast-body {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
             flex: 1;
         }
 
         .toast-item .toast-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #0f172a;
+            color: #1e293b;
         }
 
         .toast-item .toast-desc {
-            font-size: 14px;
-            color: #64748b;
-            line-height: 1.5;
+            font-size: 13px;
+            color: #5b6b7d;
+            line-height: 1.4;
         }
 
-        /* ===== Toast 黄色进度条 ===== */
         .toast-item .toast-progress {
             width: 100%;
-            height: 4px;
-            background: #fef3c7;
-            border-radius: 0 0 14px 14px;
+            height: 3px;
+            background: #f5ede4;
+            border-radius: 0 0 8px 8px;
             overflow: hidden;
         }
 
         .toast-item .toast-progress .toast-progress-bar {
             height: 100%;
-            background: #f59e0b;
-            border-radius: 0 0 0 14px;
+            background: #d4a86a;
+            border-radius: 0 0 0 8px;
             width: 100%;
         }
 
@@ -370,7 +389,7 @@
         @keyframes toastSlideIn {
             from {
                 opacity: 0;
-                transform: translateX(40px) scale(0.96);
+                transform: translateX(30px) scale(0.96);
             }
             to {
                 opacity: 1;
@@ -387,17 +406,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.80);
             z-index: 99999;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.35s ease, visibility 0.35s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
             cursor: pointer;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
         }
 
         .image-preview-overlay.active {
@@ -409,84 +426,83 @@
             max-width: 92%;
             max-height: 92%;
             object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-radius: 6px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
             cursor: pointer;
             user-select: none;
-            -webkit-user-select: none;
-            transform: scale(0.92);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
         }
 
         .image-preview-overlay.active .preview-img {
             transform: scale(1);
         }
 
-        /* 预览关闭提示（轻量水印） */
         .image-preview-overlay .preview-hint {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 13px;
-            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 12px;
+            letter-spacing: 0.5px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
         }
+
         .image-preview-overlay.active .preview-hint {
             opacity: 1;
         }
 
         /* ============================================================
-                   移动端优化（重点优化弹窗）
+                   移动端适配
         ============================================================ */
 
         @media (max-width: 640px) {
             .card {
-                padding: 24px 18px 20px;
-                border-radius: 24px;
+                padding: 20px 16px 16px;
+                border-radius: 6px;
             }
             .header-left h1 {
-                font-size: 20px;
+                font-size: 19px;
             }
             .step {
-                padding: 20px 18px;
+                padding: 16px 16px;
+                border-radius: 4px;
             }
             .step-title {
-                font-size: 17px;
+                font-size: 16px;
             }
             .step-desc {
-                font-size: 14px;
-            }
-            .placeholder-item {
-                flex: 1 1 calc(50% - 7px);
-                min-width: 100px;
-                padding: 18px 8px 14px;
-            }
-            .placeholder-item .icon {
-                font-size: 30px;
-            }
-            .placeholder-item .label {
                 font-size: 13px;
             }
+            .placeholder-item {
+                flex: 1 1 calc(50% - 6px);
+                min-width: 90px;
+                padding: 14px 6px 10px;
+            }
+            .placeholder-item .icon {
+                font-size: 26px;
+            }
+            .placeholder-item .label {
+                font-size: 12px;
+            }
             .placeholder-item .demo-img {
-                max-width: 200px;
+                max-width: 170px;
             }
             .img-error-placeholder {
-                max-width: 200px;
-                min-height: 100px;
+                max-width: 170px;
+                min-height: 80px;
             }
             .status-tip {
-                max-width: 200px;
+                max-width: 170px;
                 font-size: 12px;
-                padding: 6px 10px;
+                padding: 4px 8px;
             }
 
-            /* 移动端弹窗优化：全宽，更紧凑 */
             .toast-container {
-                top: 16px;
+                top: 12px;
                 right: 12px;
                 left: 12px;
                 align-items: stretch;
@@ -495,157 +511,11 @@
             .toast-item {
                 max-width: 100%;
                 min-width: unset;
-                border-radius: 12px;
+                border-radius: 6px;
                 width: 100%;
             }
             .toast-item .toast-content {
-                padding: 14px 18px 12px 16px;
-                gap: 12px;
-            }
-            .toast-item .toast-title {
-                font-size: 15px;
-            }
-            .toast-item .toast-desc {
-                font-size: 13px;
-            }
-            .toast-item .toast-icon {
-                font-size: 24px;
-            }
-            .toast-item .toast-progress {
-                height: 3px;
-                border-radius: 0 0 12px 12px;
-            }
-            .toast-item .toast-progress .toast-progress-bar {
-                border-radius: 0 0 0 12px;
-            }
-
-            /* 移动端预览优化 */
-            .image-preview-overlay .preview-img {
-                max-width: 94%;
-                max-height: 88%;
-                border-radius: 10px;
-            }
-            .image-preview-overlay .preview-hint {
-                bottom: 28px;
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 12px 10px 30px;
-            }
-            .card {
-                padding: 20px 14px 16px;
-                border-radius: 20px;
-            }
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-            .header-left h1 {
-                font-size: 19px;
-            }
-            .sub-headline {
-                font-size: 14px;
-                margin-bottom: 20px;
-                padding-bottom: 14px;
-            }
-            .steps {
-                gap: 18px;
-            }
-            .step {
-                padding: 16px 14px;
-                border-radius: 16px;
-            }
-            .step-header {
-                gap: 10px;
-                margin-bottom: 8px;
-            }
-            .step-num {
-                width: 30px;
-                height: 30px;
-                font-size: 15px;
-            }
-            .step-title {
-                font-size: 16px;
-            }
-            .step-desc {
-                font-size: 14px;
-                margin-bottom: 14px;
-                padding-left: 0;
-            }
-            .image-placeholder {
-                gap: 10px;
-            }
-            .placeholder-item {
-                flex: 1 1 100%;
-                min-width: 0;
-                padding: 14px 12px;
-                flex-direction: row;
-                gap: 14px;
-                justify-content: flex-start;
-                border-radius: 14px;
-                text-align: left;
-                flex-wrap: wrap;
-            }
-            .placeholder-item .icon {
-                font-size: 28px;
-                margin-bottom: 0;
-                flex-shrink: 0;
-            }
-            .placeholder-item .demo-img {
-                max-width: 140px;
-                margin-bottom: 0;
-                flex-shrink: 0;
-            }
-            .img-error-placeholder {
-                max-width: 140px;
-                min-height: 80px;
-                margin-bottom: 0;
-                flex-shrink: 0;
-                padding: 12px;
-            }
-            .img-error-placeholder .err-icon {
-                font-size: 28px;
-            }
-            .status-tip {
-                max-width: 100%;
-                font-size: 12px;
-                padding: 6px 10px;
-                order: 10;
-                flex-basis: 100%;
-            }
-            .text-group {
-                align-items: flex-start;
-            }
-            .placeholder-item .label {
-                font-size: 14px;
-            }
-            .placeholder-item .sub {
-                font-size: 12px;
-            }
-            .footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-                font-size: 12px;
-                margin-top: 24px;
-            }
-
-            /* 小屏手机弹窗优化 */
-            .toast-container {
-                top: 12px;
-                right: 10px;
-                left: 10px;
-                gap: 6px;
-            }
-            .toast-item {
-                border-radius: 10px;
-            }
-            .toast-item .toast-content {
-                padding: 12px 14px 10px 12px;
+                padding: 12px 16px 10px 14px;
                 gap: 10px;
             }
             .toast-item .toast-title {
@@ -659,71 +529,118 @@
             }
             .toast-item .toast-progress {
                 height: 2px;
-                border-radius: 0 0 10px 10px;
+                border-radius: 0 0 6px 6px;
             }
             .toast-item .toast-progress .toast-progress-bar {
-                border-radius: 0 0 0 10px;
-            }
-
-            /* 小屏预览优化 */
-            .image-preview-overlay .preview-img {
-                max-width: 96%;
-                max-height: 85%;
-                border-radius: 8px;
-            }
-            .image-preview-overlay .preview-hint {
-                bottom: 20px;
-                font-size: 11px;
+                border-radius: 0 0 0 6px;
             }
         }
 
-        @media (max-width: 380px) {
+        @media (max-width: 480px) {
+            body {
+                padding: 12px 8px 30px;
+            }
             .card {
-                padding: 16px 10px 14px;
+                padding: 16px 12px 14px;
+                border-radius: 4px;
             }
             .header-left h1 {
-                font-size: 17px;
+                font-size: 18px;
+            }
+            .sub-headline {
+                font-size: 13px;
+                margin-bottom: 18px;
+                padding-bottom: 12px;
+            }
+            .steps {
+                gap: 14px;
             }
             .step {
                 padding: 14px 12px;
+                border-radius: 4px;
+            }
+            .step-header {
+                gap: 10px;
+                margin-bottom: 6px;
+            }
+            .step-num {
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
             }
             .step-title {
                 font-size: 15px;
             }
             .step-desc {
                 font-size: 13px;
+                margin-bottom: 12px;
+                padding-left: 0;
+            }
+            .image-placeholder {
+                gap: 8px;
             }
             .placeholder-item {
+                flex: 1 1 100%;
+                min-width: 0;
                 padding: 12px 10px;
-                gap: 10px;
+                flex-direction: row;
+                gap: 12px;
+                justify-content: flex-start;
+                border-radius: 6px;
+                text-align: left;
+                flex-wrap: wrap;
             }
             .placeholder-item .icon {
                 font-size: 24px;
+                margin-bottom: 0;
+                flex-shrink: 0;
             }
             .placeholder-item .demo-img {
-                max-width: 100px;
+                max-width: 120px;
+                margin-bottom: 0;
+                flex-shrink: 0;
             }
             .img-error-placeholder {
-                max-width: 100px;
+                max-width: 120px;
                 min-height: 60px;
-                padding: 8px;
+                padding: 10px;
                 font-size: 12px;
             }
             .img-error-placeholder .err-icon {
-                font-size: 22px;
+                font-size: 24px;
+            }
+            .status-tip {
+                max-width: 100%;
+                font-size: 12px;
+                padding: 4px 8px;
+                order: 10;
+                flex-basis: 100%;
+            }
+            .text-group {
+                align-items: flex-start;
             }
             .placeholder-item .label {
                 font-size: 13px;
             }
-            .status-tip {
+            .placeholder-item .sub {
                 font-size: 11px;
-                padding: 4px 8px;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+                font-size: 12px;
+                margin-top: 20px;
             }
 
             .toast-container {
-                top: 8px;
+                top: 10px;
                 right: 8px;
                 left: 8px;
+                gap: 4px;
+            }
+            .toast-item {
+                border-radius: 6px;
             }
             .toast-item .toast-content {
                 padding: 10px 12px 8px 10px;
@@ -733,16 +650,95 @@
                 font-size: 13px;
             }
             .toast-item .toast-desc {
-                font-size: 11px;
+                font-size: 12px;
             }
             .toast-item .toast-icon {
                 font-size: 18px;
             }
+            .toast-item .toast-progress {
+                height: 2px;
+                border-radius: 0 0 6px 6px;
+            }
+            .toast-item .toast-progress .toast-progress-bar {
+                border-radius: 0 0 0 6px;
+            }
 
+            .image-preview-overlay .preview-img {
+                max-width: 96%;
+                max-height: 85%;
+                border-radius: 4px;
+            }
+            .image-preview-overlay .preview-hint {
+                bottom: 20px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .card {
+                padding: 12px 8px 10px;
+            }
+            .header-left h1 {
+                font-size: 16px;
+            }
+            .step {
+                padding: 10px 10px;
+            }
+            .step-title {
+                font-size: 14px;
+            }
+            .step-desc {
+                font-size: 12px;
+            }
+            .placeholder-item {
+                padding: 10px 8px;
+                gap: 8px;
+            }
+            .placeholder-item .icon {
+                font-size: 20px;
+            }
+            .placeholder-item .demo-img {
+                max-width: 90px;
+            }
+            .img-error-placeholder {
+                max-width: 90px;
+                min-height: 50px;
+                padding: 6px;
+                font-size: 11px;
+            }
+            .img-error-placeholder .err-icon {
+                font-size: 20px;
+            }
+            .placeholder-item .label {
+                font-size: 12px;
+            }
+            .status-tip {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
+
+            .toast-container {
+                top: 6px;
+                right: 6px;
+                left: 6px;
+            }
+            .toast-item .toast-content {
+                padding: 8px 10px 6px 8px;
+                gap: 6px;
+            }
+            .toast-item .toast-title {
+                font-size: 12px;
+            }
+            .toast-item .toast-desc {
+                font-size: 11px;
+            }
+            .toast-item .toast-icon {
+                font-size: 16px;
+            }
             .image-preview-overlay .preview-img {
                 max-width: 98%;
                 max-height: 80%;
-                border-radius: 6px;
+                border-radius: 4px;
             }
             .image-preview-overlay .preview-hint {
                 bottom: 16px;
@@ -763,7 +759,7 @@
         </div>
 
         <div class="sub-headline">
-            被误踢了？按以下步骤提交截图，管理员核实后会拉你回群。
+            此页面用于企微群被踢申诉方式，按照步骤操作即可完成申诉。请确保提交信息准确，请勿重复提交。
         </div>
 
         <!-- ===== 步骤列表 ===== -->
@@ -797,16 +793,16 @@
             </div>
 
             <!-- 步骤 2：添加群主 → 进入企业信息 -->
-            <div class="step" style="border-top-color: #2563eb; background: #f8faff;">
+            <div class="step" style="border-top-color: #4a6a8c; background: #f8f9fb;">
                 <div class="step-header">
                     <span class="step-num">2</span>
                     <span class="step-title">添加群主Annie → 进入「企业信息」</span>
                 </div>
                 <div class="step-desc">
-                    <strong>添加群主为联系人后 → </strong>点击群主头像 → <strong>企业信息</strong> → 底部 <strong>「误踢反馈」</strong> 按钮，跳转问卷后提交相关信息。
+                    <strong>添加群主为联系人后 → </strong>点击群主头像 → <strong>企业信息</strong> → 点击底部 <strong>「误踢反馈」</strong> ，跳转问卷后提交相关信息。
                 </div>
                 <div class="image-placeholder">
-                    <div class="placeholder-item" style="flex: 1 1 220px; min-width: 160px; flex-wrap: wrap;">
+                    <div class="placeholder-item" style="flex: 1 1 200px; min-width: 150px; flex-wrap: wrap;">
 
                         <!-- ===== 状态提示条（仅用于红色错误） ===== -->
                         <div id="statusTip" class="status-tip"></div>
@@ -814,7 +810,7 @@
                         <!-- ==========================================================
                         图片配置区 — 修改下方两个 src 即可
                         ========================================================== -->
-                        <!-- 主图（建议使用外部图片链接，失效时会自动切换备用图并弹窗） -->
+                        <!-- 主图 -->
                         <img 
                             id="mainImage"
                             src="https://1837491863.cdn.123clouddisk.com/1837491863/40203546"
@@ -822,7 +818,7 @@
                             class="demo-img"
                         />
 
-                        <!-- 备用图（主图失效时自动切换至此，建议使用稳定链接） -->
+                        <!-- 备用图 -->
                         <img 
                             id="fallbackImage"
                             src="https://153485619232768.abvod.cn/fly.jpg"
@@ -831,7 +827,7 @@
                             style="display: none;"
                         />
 
-                        <!-- ===== 纯文字备用（当主图和备用图都加载失败时显示） ===== -->
+                        <!-- ===== 纯文字备用 ===== -->
                         <div id="textFallback" class="img-error-placeholder" style="display: none;">
                             <span class="err-icon">🖼️</span>
                             <span>图片加载失败<br/>请参考文字描述</span>
@@ -845,6 +841,19 @@
                 </div>
             </div>
 
+            <!-- ===== 新增步骤 3：提交后等待审核 ===== -->
+            <div class="step" style="border-top-color: #4a6a8c; background: #fafbfc;">
+                <div class="step-header">
+                    <span class="step-num">3</span>
+                    <span class="step-title">等待审核</span>
+                </div>
+                <div class="step-desc">
+                    提交申诉后，请勿重复提交，请 <strong>耐心等待</strong> 。<br/>
+                    审核通过后会重新邀你入群，请注意留意消息通知。
+                </div>
+                <!-- 没有图片占位，纯文字说明 -->
+            </div>
+
         </div>
 
         <!-- ===== 底部 ===== -->
@@ -856,12 +865,12 @@
     </div>
 
     <!-- ============================================================
-    右上角 Toast 容器（无关闭按钮，黄色进度条）
+    Toast 容器
     ============================================================ -->
     <div id="toastContainer" class="toast-container"></div>
 
     <!-- ============================================================
-    图片预览遮罩层（点击图片放大）
+    图片预览遮罩层
     ============================================================ -->
     <div id="imagePreview" class="image-preview-overlay">
         <img id="previewImg" class="preview-img" src="" alt="预览图片" />
@@ -870,23 +879,15 @@
 
     <script>
         // ================================================================
-        //  Toast 管理（右上角弹窗，无关闭按钮，黄色进度条，点击关闭）
+        //  Toast 管理
         // ================================================================
 
         var toastContainer = document.getElementById('toastContainer');
         var toastTimer = null;
 
-        /**
-         * 显示右上角 Toast 提示（带黄色进度条，无×按钮）
-         * @param {string} icon - 图标 emoji
-         * @param {string} title - 标题
-         * @param {string} desc - 描述
-         * @param {number} duration - 自动消失毫秒数，默认8000ms
-         */
         function showToast(icon, title, desc, duration) {
             duration = duration || 8000;
 
-            // 移除已有 toast
             var existing = toastContainer.querySelector('.toast-item');
             if (existing) {
                 if (existing.parentNode) {
@@ -898,29 +899,26 @@
                 }
             }
 
-            // 创建新 toast
             var toast = document.createElement('div');
             toast.className = 'toast-item';
-            toast.innerHTML = 
+            toast.innerHTML =
                 '<div class="toast-content">' +
-                    '<span class="toast-icon">' + icon + '</span>' +
-                    '<div class="toast-body">' +
-                        '<span class="toast-title">' + title + '</span>' +
-                        '<span class="toast-desc">' + desc + '</span>' +
-                    '</div>' +
+                '<span class="toast-icon">' + icon + '</span>' +
+                '<div class="toast-body">' +
+                '<span class="toast-title">' + title + '</span>' +
+                '<span class="toast-desc">' + desc + '</span>' +
+                '</div>' +
                 '</div>' +
                 '<div class="toast-progress">' +
-                    '<div class="toast-progress-bar" id="toastProgressBar"></div>' +
+                '<div class="toast-progress-bar" id="toastProgressBar"></div>' +
                 '</div>';
 
-            // 点击 toast 任意区域关闭
             toast.addEventListener('click', function() {
                 dismissToast(toast);
             });
 
             toastContainer.appendChild(toast);
 
-            // 动态设置进度条动画时长
             var progressBar = toast.querySelector('#toastProgressBar');
             if (progressBar) {
                 progressBar.style.animation = 'none';
@@ -928,7 +926,6 @@
                 progressBar.style.animation = 'progressShrink ' + (duration / 1000) + 's linear forwards';
             }
 
-            // 自动消失
             if (duration > 0) {
                 toastTimer = setTimeout(function() {
                     dismissToast(toast);
@@ -936,9 +933,6 @@
             }
         }
 
-        /**
-         * 关闭单个 toast（带淡出动画）
-         */
         function dismissToast(toast) {
             if (!toast || !toast.parentNode) return;
             if (toast.classList.contains('hiding')) return;
@@ -956,7 +950,7 @@
         }
 
         // ================================================================
-        //  红色错误提示（仅用于备用图也失败时）
+        //  红色错误提示
         // ================================================================
 
         function showErrorTip(message) {
@@ -974,7 +968,7 @@
         }
 
         // ================================================================
-        //  文字占位（主图 + 备用图均失败）
+        //  图片降级
         // ================================================================
 
         function showTextFallback() {
@@ -987,19 +981,11 @@
             if (textFallback) textFallback.style.display = 'flex';
         }
 
-        // ================================================================
-        //  备用图加载失败 → 红色错误
-        // ================================================================
-
         function handleFallbackError(img) {
             hideStatusTip();
             showErrorTip('❌ 备用图加载失败，请参考文字描述');
             showTextFallback();
         }
-
-        // ================================================================
-        //  主图加载失败 → 右上角 Toast（黄色进度条）+ 切换备用图
-        // ================================================================
 
         function handleImageError(img) {
             if (img.dataset.fallbackAttempted === 'true') {
@@ -1009,10 +995,7 @@
             }
 
             img.dataset.fallbackAttempted = 'true';
-
-            // 显示 Toast，8秒自动消失
             showToast('🔄', '主图加载失败', '已切换至备用示意图', 8000);
-
             hideStatusTip();
 
             var fallback = document.getElementById('fallbackImage');
@@ -1030,7 +1013,7 @@
         }
 
         // ================================================================
-        //  主动检测主图加载状态（3秒超时检测）
+        //  主动检测主图加载状态（3秒超时）
         // ================================================================
 
         function checkMainImage() {
@@ -1062,17 +1045,13 @@
         }
 
         // ================================================================
-        //  图片预览功能（点击放大，再次点击返回）
+        //  图片预览
         // ================================================================
 
         var previewOverlay = document.getElementById('imagePreview');
         var previewImg = document.getElementById('previewImg');
         var isPreviewOpen = false;
 
-        /**
-         * 打开图片预览
-         * @param {string} src - 图片地址
-         */
         function openPreview(src) {
             if (!src) return;
             previewImg.src = src;
@@ -1081,14 +1060,10 @@
             document.body.style.overflow = 'hidden';
         }
 
-        /**
-         * 关闭图片预览
-         */
         function closePreview() {
             previewOverlay.classList.remove('active');
             isPreviewOpen = false;
             document.body.style.overflow = '';
-            // 延迟清空 src，避免闪烁
             setTimeout(function() {
                 if (!isPreviewOpen) {
                     previewImg.src = '';
@@ -1096,42 +1071,33 @@
             }, 400);
         }
 
-        // 点击遮罩层关闭预览（点击背景）
         previewOverlay.addEventListener('click', function(e) {
-            // 如果点击的是遮罩本身或图片，都关闭
             if (e.target === this || e.target === previewImg) {
                 closePreview();
             }
         });
 
-        // 给所有图片绑定点击事件（支持主图和备用图）
         document.addEventListener('DOMContentLoaded', function() {
-            // 执行主图检测
             checkMainImage();
 
-            // 绑定图片点击事件
             var images = document.querySelectorAll('.demo-img');
             images.forEach(function(img) {
                 img.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    // 只处理可见且已加载成功的图片
                     if (this.style.display === 'none') return;
                     if (!this.complete || this.naturalWidth === 0) return;
-                    // 如果图片正在加载中，不触发预览
                     if (!this.complete) return;
                     openPreview(this.src);
                 });
             });
         });
 
-        // 按 ESC 键关闭预览
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && isPreviewOpen) {
                 closePreview();
             }
         });
 
-        // 当页面卸载时清理
         window.addEventListener('beforeunload', function() {
             if (isPreviewOpen) {
                 closePreview();
