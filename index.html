@@ -244,17 +244,40 @@
             display: block;
         }
 
+        /* ----- 底部：链接样式 ----- */
         .footer {
             margin-top: 28px;
             padding-top: 14px;
             border-top: 1px solid #e9edf2;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
             font-size: 12px;
             color: #8a9aa9;
+            gap: 2px;
+            flex-wrap: wrap;
+        }
+
+        .footer .link-blue {
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer .link-blue:hover {
+            text-decoration: underline;
+        }
+
+        /* 移动端适配时保持居中 */
+        @media (max-width: 480px) {
+            .footer {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2px;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
         }
 
         /* ============================================================
@@ -620,11 +643,13 @@
             }
 
             .footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 2px;
                 font-size: 12px;
                 margin-top: 20px;
+                flex-wrap: wrap;
             }
 
             .toast-container {
@@ -850,9 +875,11 @@
 
         </div>
 
+        <!-- ===== 底部：仅 "RH工作室" 为蓝色可点击，其余文字不变 ===== -->
         <div class="footer">
-            <span></span>
-            <span></span>
+            <span>此页面由</span>
+            <a href="https://annie106.github.io/RHfortwo" target="_blank" class="link-blue">RH工作室</a>
+            <span>提供</span>
         </div>
 
     </div>
