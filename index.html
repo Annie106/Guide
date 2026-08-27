@@ -55,9 +55,27 @@
             font-size: 14px;
             color: #5b6b7d;
             margin-top: 2px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #e9edf2;
+        }
+
+        /* ===== 提示条（低调版，位于副标题下方） ===== */
+        .notice-bar {
+            border-left: 3px solid #d5dbe3;
+            padding: 4px 0 4px 14px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #6b7a8a;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .notice-bar .notice-text strong {
+            font-weight: 500;
+            color: #4a6a8c;
         }
 
         .steps {
@@ -244,40 +262,43 @@
             display: block;
         }
 
-        /* ----- 底部：链接样式 ----- */
+        /* ===== 底部：优化显示效果（已删除箭头） ===== */
         .footer {
             margin-top: 28px;
-            padding-top: 14px;
+            padding-top: 18px;
             border-top: 1px solid #e9edf2;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+            gap: 4px;
+            font-size: 13px;
             color: #8a9aa9;
-            gap: 2px;
             flex-wrap: wrap;
+        }
+
+        .footer .footer-divider {
+            color: #d5dbe3;
+            font-weight: 300;
+            margin: 0 2px;
         }
 
         .footer .link-blue {
             color: #2563eb;
             text-decoration: none;
-            cursor: pointer;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            position: relative;
         }
 
         .footer .link-blue:hover {
-            text-decoration: underline;
+            background-color: #eff6ff;
+            text-decoration: none;
         }
 
-        /* 移动端适配时保持居中 */
-        @media (max-width: 480px) {
-            .footer {
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 2px;
-                margin-top: 20px;
-                flex-wrap: wrap;
-            }
+        .footer .footer-label {
+            color: #8a9aa9;
         }
 
         /* ============================================================
@@ -545,8 +566,14 @@
             }
             .sub-headline {
                 font-size: 13px;
-                margin-bottom: 18px;
-                padding-bottom: 12px;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+            .notice-bar {
+                font-size: 12px;
+                padding: 3px 0 3px 12px;
+                margin-bottom: 16px;
+                border-left-width: 2px;
             }
             .steps {
                 gap: 14px;
@@ -646,10 +673,15 @@
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                gap: 2px;
+                gap: 4px;
                 font-size: 12px;
                 margin-top: 20px;
                 flex-wrap: wrap;
+                padding-top: 14px;
+            }
+
+            .footer .link-blue {
+                font-size: 12px;
             }
 
             .toast-container {
@@ -785,6 +817,11 @@
             此页面用于企微群被踢申诉方式，按照步骤操作即可完成申诉。请确保的提交信息准确，请勿重复提交。
         </div>
 
+        <!-- ===== 提示条（低调版，位于副标题下方，无图钉） ===== -->
+        <div class="notice-bar">
+            <span class="notice-text"><strong>此教程仅针对被误踢的群成员</strong>，请确认您是被系统误移除而非主动退群或违规被踢。</span>
+        </div>
+
         <div class="steps">
 
             <!-- 步骤 1 -->
@@ -875,11 +912,11 @@
 
         </div>
 
-        <!-- ===== 底部：仅 "RH工作室" 为蓝色可点击，其余文字不变 ===== -->
+        <!-- ===== 底部（已删除箭头） ===== -->
         <div class="footer">
-            <span>此页面由</span>
-            <a href="https://annie106.github.io/RHfortwo" target="_blank" class="link-blue">RH工作室</a>
-            <span>提供</span>
+            <span class="footer-label">此页面由</span>
+            <a href="#" target="_blank" class="link-blue">RH工作室</a>
+            <span class="footer-label">提供</span>
         </div>
 
     </div>
