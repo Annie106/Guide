@@ -302,7 +302,7 @@
         }
 
         /* ============================================================
-                   Toast（右上角，黄色进度条）
+                   Toast（右上角，暗色错误提示卡片 —— 放大版）
         ============================================================ */
         .toast-container {
             position: fixed;
@@ -314,23 +314,28 @@
             align-items: flex-end;
             gap: 6px;
             pointer-events: none;
-            max-width: 90vw;
+            max-width: 92vw;
         }
 
         .toast-item {
             pointer-events: auto;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
-            border: 1px solid #e5e9ef;
-            min-width: 260px;
-            max-width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 380px;
+            max-width: 100%;
+            min-height: 76px;
+            padding: 12px 14px;
+            background: #232531;
+            border-radius: 12px;
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.22);
+            font-size: 14px;
+            line-height: 1.4;
             animation: toastSlideIn 0.3s ease;
             transition: opacity 0.25s ease, transform 0.25s ease;
             opacity: 1;
             transform: translateX(0);
-            overflow: hidden;
-            cursor: pointer;
+            cursor: default;
         }
 
         .toast-item.hiding {
@@ -338,59 +343,74 @@
             transform: translateX(30px);
         }
 
-        .toast-item .toast-content {
+        .toast-item .toast-left {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 20px 12px 18px;
+            min-width: 0;
         }
 
-        .toast-item .toast-icon {
-            font-size: 24px;
+        .toast-item .toast-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
+            padding: 8px;
+            border-radius: 10px;
+            color: #d65563;
+            background: rgba(255, 255, 255, 0.06);
+            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(24px);
+        }
+
+        .toast-item .toast-svg {
+            width: 30px;
+            height: 30px;
+            display: block;
         }
 
         .toast-item .toast-body {
+            min-width: 0;
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            flex: 1;
+            gap: 3px;
         }
 
         .toast-item .toast-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #1e293b;
+            margin: 0;
+            font-size: 1em;
+            font-weight: 500;
+            color: #ffffff;
         }
 
         .toast-item .toast-desc {
-            font-size: 13px;
-            color: #5b6b7d;
-            line-height: 1.4;
+            margin: 0;
+            font-size: 0.9em;
+            color: #8b93a7;
         }
 
-        .toast-item .toast-progress {
-            width: 100%;
-            height: 3px;
-            background: #f5ede4;
-            border-radius: 0 0 8px 8px;
-            overflow: hidden;
+        .toast-item .toast-close {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            margin-left: 8px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #4b5563;
+            cursor: pointer;
+            transition: background-color 0.1s linear;
         }
 
-        .toast-item .toast-progress .toast-progress-bar {
-            height: 100%;
-            background: #d4a86a;
-            border-radius: 0 0 0 8px;
-            width: 100%;
+        .toast-item .toast-close:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes progressShrink {
-            from {
-                width: 100%;
-            }
-            to {
-                width: 0%;
-            }
+        .toast-item .toast-close .toast-svg {
+            width: 24px;
+            height: 24px;
         }
 
         @keyframes toastSlideIn {
@@ -522,34 +542,23 @@
                 top: 12px;
                 right: 12px;
                 left: 12px;
-                align-items: stretch;
+                align-items: flex-end;
                 max-width: 100%;
             }
             .toast-item {
+                width: 340px;
                 max-width: 100%;
-                min-width: unset;
-                border-radius: 6px;
-                width: 100%;
+                min-height: 68px;
+                font-size: 13px;
+                border-radius: 10px;
             }
-            .toast-item .toast-content {
-                padding: 12px 16px 10px 14px;
-                gap: 10px;
+            .toast-item .toast-svg {
+                width: 26px;
+                height: 26px;
             }
-            .toast-item .toast-title {
-                font-size: 14px;
-            }
-            .toast-item .toast-desc {
-                font-size: 12px;
-            }
-            .toast-item .toast-icon {
-                font-size: 20px;
-            }
-            .toast-item .toast-progress {
-                height: 2px;
-                border-radius: 0 0 6px 6px;
-            }
-            .toast-item .toast-progress .toast-progress-bar {
-                border-radius: 0 0 0 6px;
+            .toast-item .toast-close .toast-svg {
+                width: 22px;
+                height: 22px;
             }
         }
 
@@ -686,32 +695,36 @@
 
             .toast-container {
                 top: 10px;
-                right: 8px;
-                left: 8px;
+                right: 10px;
+                left: 10px;
                 gap: 4px;
             }
             .toast-item {
-                border-radius: 6px;
-            }
-            .toast-item .toast-content {
-                padding: 10px 12px 8px 10px;
-                gap: 8px;
-            }
-            .toast-item .toast-title {
-                font-size: 13px;
-            }
-            .toast-item .toast-desc {
+                width: 100%;
+                max-width: 100%;
+                min-height: 64px;
                 font-size: 12px;
+                padding: 10px 12px;
+                border-radius: 10px;
             }
-            .toast-item .toast-icon {
-                font-size: 18px;
+            .toast-item .toast-left {
+                gap: 10px;
             }
-            .toast-item .toast-progress {
-                height: 2px;
-                border-radius: 0 0 6px 6px;
+            .toast-item .toast-icon-wrap {
+                padding: 6px;
+                border-radius: 8px;
             }
-            .toast-item .toast-progress .toast-progress-bar {
-                border-radius: 0 0 0 6px;
+            .toast-item .toast-svg {
+                width: 24px;
+                height: 24px;
+            }
+            .toast-item .toast-close {
+                padding: 4px;
+                margin-left: 6px;
+            }
+            .toast-item .toast-close .toast-svg {
+                width: 20px;
+                height: 20px;
             }
 
             .image-preview-overlay .preview-img {
@@ -778,19 +791,20 @@
                 right: 6px;
                 left: 6px;
             }
-            .toast-item .toast-content {
-                padding: 8px 10px 6px 8px;
-                gap: 6px;
-            }
-            .toast-item .toast-title {
-                font-size: 12px;
-            }
-            .toast-item .toast-desc {
+            .toast-item {
+                min-height: 60px;
                 font-size: 11px;
+                padding: 8px 10px;
             }
-            .toast-item .toast-icon {
-                font-size: 16px;
+            .toast-item .toast-svg {
+                width: 22px;
+                height: 22px;
             }
+            .toast-item .toast-close .toast-svg {
+                width: 18px;
+                height: 18px;
+            }
+
             .image-preview-overlay .preview-img {
                 max-width: 98%;
                 max-height: 80%;
@@ -932,12 +946,22 @@
 
     <script>
         // ================================================================
-        //  Toast
+        //  Toast（暗色错误提示卡片）
         // ================================================================
         var toastContainer = document.getElementById('toastContainer');
         var toastTimer = null;
 
-        function showToast(icon, title, desc, duration) {
+        var TOAST_ICON_SVG =
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="toast-svg">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>' +
+            '</svg>';
+
+        var TOAST_CLOSE_SVG =
+            '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="toast-svg">' +
+            '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>' +
+            '</svg>';
+
+        function showToast(title, desc, duration) {
             duration = duration || 8000;
             var existing = toastContainer.querySelector('.toast-item');
             if (existing) {
@@ -948,22 +972,25 @@
             var toast = document.createElement('div');
             toast.className = 'toast-item';
             toast.innerHTML =
-                '<div class="toast-content">' +
-                '<span class="toast-icon">' + icon + '</span>' +
+                '<div class="toast-left">' +
+                '<div class="toast-icon-wrap">' + TOAST_ICON_SVG + '</div>' +
                 '<div class="toast-body">' +
-                '<span class="toast-title">' + title + '</span>' +
-                '<span class="toast-desc">' + desc + '</span>' +
+                '<p class="toast-title">' + title + '</p>' +
+                '<p class="toast-desc">' + desc + '</p>' +
                 '</div>' +
                 '</div>' +
-                '<div class="toast-progress"><div class="toast-progress-bar" id="toastProgressBar"></div></div>';
-            toast.addEventListener('click', function() { dismissToast(toast); });
-            toastContainer.appendChild(toast);
-            var progressBar = toast.querySelector('#toastProgressBar');
-            if (progressBar) {
-                progressBar.style.animation = 'none';
-                void progressBar.offsetHeight;
-                progressBar.style.animation = 'progressShrink ' + (duration / 1000) + 's linear forwards';
+                '<button type="button" class="toast-close" aria-label="关闭">' + TOAST_CLOSE_SVG + '</button>';
+
+            var closeBtn = toast.querySelector('.toast-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dismissToast(toast);
+                });
             }
+
+            toastContainer.appendChild(toast);
+
             if (duration > 0) {
                 toastTimer = setTimeout(function() { dismissToast(toast); }, duration);
             }
@@ -1020,7 +1047,7 @@
                 return;
             }
             img.dataset.fallbackAttempted = 'true';
-            showToast('🔄', '主图加载失败', '已切换至备用示意图', 8000);
+            showToast('主图加载失败', '已切换至备用示意图', 8000);
             hideStatusTip();
 
             var fallback = document.getElementById('fallbackImage');
